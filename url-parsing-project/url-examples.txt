@@ -1,0 +1,88 @@
+scheme:[//authority]path[?query][#fragment]
+content://com.example.project.healthcareprovider/nurses/rn
+URI = scheme ":" ["//" authority] path ["?" query] ["#" fragment]
+authority = [userinfo "@"] host [":" port]
+[//[user:password@]host[:port]][/]path[?query][#fragment]
+For a url
+
+latin_a = 'A'  # https://en.wikipedia.org/wiki/A
+greek_a = 'Α'  # https://en.wikipedia.org/wiki/Alpha
+
+Domain requirements are listed [here](https://datatracker.ietf.org/doc/html/rfc920).
+List of acceptable domain characters [source](https://datatracker.ietf.org/doc/html/rfc1033)
+
+"A-Z", "a-z", "0-9", dash and underscore
+
+https://man7.org/linux/man-pages/man7/hostname.7.html
+https://www.rfc-editor.org/rfc/rfc3986#section-1.2.3
+https://javascript.info/article/url/url-object.svg
+
+"?" query string begins
+"query" is also known as "key"
+The & is a "separator"
+"value" is whatever comes after the = sign.
+
+The generic syntax uses the slash ("/"), question mark ("?"), and
+number sign ("#") characters to delimit components that are
+significant to the generic parser's hierarchical interpretation of an
+identifier.
+
+
+https://sethmlarson.dev/why-urls-are-hard-path-params-urlparse
+https://dev.to/sethmlarson/why-urls-are-hard-path-parameters-and-urlparse-c2n
+https://kinsta.com/knowledgebase/what-is-a-url/
+http://microformats.org/wiki/url-formats
+
+
+> An optional **authority** component preceded by two slashes (`//`), comprising:
+
+https://en.wikipedia.org/wiki/List_of_URI_schemes
+https://www.website.co.uk/~home/1/2/3/filename.php?1=2;3=4;5=6&a=b;c=d;e=f#hash
+
+
+Property	Information
+hash 	    Gives the value after '#' in URL, helpful while using angularjs
+host 	    Gives the domain name like 'www.google.co.in' 
+href	    Gives full URL present in the address bar
+origin 	    Gives host with http/https like 'https://www.google.co.in'
+pathname 	Gives the name of the page excluding querystring and origin
+port 	    Gives the port number if its mentioned in URL
+protocol 	Gives the value as 'http:' or 'https:'
+search	    Gives full query string starting from '?' sign
+
+
+
+HTTP_URL_REPLACE        http://user:pass@www.example.com:8080/pub/index.php?a=b#files
+HTTP_URL_JOIN_PATH      http://user:pass@www.example.com:8080/pub/index.php?a=b#files
+HTTP_URL_JOIN_QUERY     http://user:pass@www.example.com:8080/pub/index.php?a=b#files
+HTTP_URL_STRIP_USER     http://www.example.com:8080/pub/index.php?a=b#files
+HTTP_URL_STRIP_PASS     http://user@www.example.com:8080/pub/index.php?a=b#files
+HTTP_URL_STRIP_AUTH     http://www.example.com:8080/pub/index.php?a=b#files
+HTTP_URL_STRIP_PORT     http://user:pass@www.example.com/pub/index.php?a=b#files
+HTTP_URL_STRIP_PATH     http://user:pass@www.example.com:8080?a=b#files
+HTTP_URL_STRIP_QUERY    http://user:pass@www.example.com:8080/pub/index.php#files
+HTTP_URL_STRIP_FRAGMENT http://user:pass@www.example.com:8080/pub/index.php?a=b
+HTTP_URL_STRIP_ALL      http://www.example.com
+
+
+
+
+à la mode
+ġőŏģļĕ.ĉōɱ
+google
+ġőŏģļĕ
+.me
+.ⅿē
+.ai
+.ăĩ
+.com
+.ĉōɱ
+.net
+.ňęŧ
+.co.uk
+.čő.ǔķ
+.com.br
+.ⅽőⅿ.ƅŕ
+.com.au
+.com.mx
+nic.ai
