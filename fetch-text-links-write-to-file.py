@@ -1,18 +1,24 @@
 import requests
 import re
 
-# Which url do we want to scrape?
-url = 'https://www.ietf.org/rfc/'
 
-# Make request, scrape for a hrefs (links).
-# But specifically ones with a .txt file ext.
-raw_response = requests.get(url)
-text = raw_response.text
-links = re.findall(r'href="([^"]*?.txt)"', text)
+BASE_URL = 'https://www.ietf.org/rfc/'
+LINK_REGEX = r'href="(.+\.txt)"'
 
-# Write the link to each txt file in a txt file.
-file = open('text_files.txt', 'w')
-with file as new_file:
-    for link in links:
-        link = f'https://www.ietf.org/rfc/{link}'
-        new_file.write(f'{link}\n')
+
+try:
+    # Make a request to the base URL
+    response = requests.get(BASE_URL)
+    response.raise_for_status()
+
+    # Extract all links to .txt files
+    links = re.findall(LINK_REGEX, response.text)
+
+    # Write links to a file
+    with open('text_files.txt', 'w') as file:
+        for link in links:
+            url = BASE_URL + link
+            file.write(url + '\n')
+
+except requests.exceptions.RequestException as e:
+    print(f'Error occurred: {e}')

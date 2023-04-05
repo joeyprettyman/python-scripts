@@ -1,27 +1,26 @@
 import requests
-import html
+from html import unescape
 
-# Get basic cleaned HTML from a given url.
+USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/110.0'
+ACCEPT_HEADERS = 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8'
+
 def fetch_source_from_url(url):
+    """
+    Fetches the HTML source code of a webpage and cleans it using the html.unescape() function.
+    """
+    headers = {'User-Agent': USER_AGENT, 'Accept': ACCEPT_HEADERS}
+    response = requests.get(url, headers=headers)
+    response.raise_for_status()
+    source_clean = unescape(response.text)
+    return source_clean
 
-    headers = {
-        'Host': 'web.archive.org',
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/110.0',
-        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8'
-    }    
-
-    with requests.Session() as session:
-        source_raw = session.get(url)
-        source_text = source_raw.text
-        source_clean = html.unescape(source_text)
-
-        return source_clean
-
-# Perform initial archive discovery
 def perform_archive_discovery(url):
-    wayback_machine_url = 'web.archive.org/cdx/search/cdx'
-    query = f'url={url}&output=json&matchType=prefix&limit=5&showResumeKey=true'
-    full_url = f'https://{wayback_machine_url}?{query}'
-    discovery_data = fetch_source_from_url(full_url)
-
+    """
+    Performs archive discovery on a webpage using the Wayback Machine's CDX API.
+    """
+    WAYBACK_MACHINE_URL = 'https://web.archive.org/cdx/search/cdx'
+    params = {'url': url, 'output': 'json', 'matchType': 'prefix', 'limit': 5, 'showResumeKey': 'true'}
+    response = requests.get(WAYBACK_MACHINE_URL, params=params)
+    response.raise_for_status()
+    discovery_data = response.json()
     return discovery_data
